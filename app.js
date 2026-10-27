@@ -308,6 +308,7 @@ function setLanguage(lang,announce=false){
 }
 document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang,true)));
 document.documentElement.classList.add('js');
-let initial='ca';try{const saved=localStorage.getItem('gus-language');if(content[saved])initial=saved}catch{}
+const hostLang={'guselgospigall.com':'ca','guselperroguia.com':'es','gustheguidedog.com':'en'};
+let initial=Object.entries(hostLang).find(([d])=>location.hostname===d||location.hostname.endsWith('.'+d))?.[1]||'ca';try{const saved=localStorage.getItem('gus-language');if(content[saved])initial=saved}catch{}
 setLanguage(initial);
 document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{const target=document.getElementById(link.getAttribute('href').slice(1));if(target){target.focus({preventScroll:true})}}));
